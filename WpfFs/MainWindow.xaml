@@ -1,0 +1,21 @@
+﻿<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:gif="clr-namespace:XamlAnimatedGif;assembly=XamlAnimatedGif"
+    xmlns:local="clr-namespace:WpfFs;assembly=WpfFs"
+    MinHeight="120" Width="300" Height="Auto" SizeToContent="WidthAndHeight">
+    <Window.Resources>
+        <local:BytesToStreamConverter x:Key="bytesToStreamConverter"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBlock Text="Click button to change Image" FontSize="16" Grid.Row="0" />
+        <!--<Image Grid.Row="1" Source="{Binding Current.bytes}"/>-->
+        <Image Grid.Row="1" gif:AnimationBehavior.SourceStream="{Binding Current.bytes, Converter={StaticResource bytesToStreamConverter}}"/>
+        <Button Grid.Row="2" Content="Change" Command="{Binding ChangeImage}"/>
+    </Grid>
+</Window>
